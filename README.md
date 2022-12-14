@@ -1,6 +1,6 @@
 # BioNix-VIRUSBreakend
 
-Writing [VIRUSBreakend](https://github.com/PapenfussLab/gridss/blob/master/VIRUSBreakend_Readme.md) as a [BioNix](https://github.com/PapenfussLab/bionix) pipeline. VIRUSBreakend is high-speed tool that detects viral DNA integration using single breakends.
+Writing [VIRUSBreakend](https://github.com/PapenfussLab/gridss/blob/master/VIRUSBreakend_Readme.md) as a [BioNix](https://github.com/PapenfussLab/bionix) pipeline. VIRUSBreakend is a high-speed tool that detects viral DNA integration using single breakends.
 
 
 ## Installation
