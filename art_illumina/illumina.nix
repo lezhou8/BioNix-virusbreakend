@@ -9,7 +9,7 @@ with builtins;
 # { fasta, name, depth }
 input:
 
-# need to make variables for output names
+# TODO: need to make variables for output names but it is being annoying
 stage {
   name = "illumina";
   buildInputs = [ art.app ];
