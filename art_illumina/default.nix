@@ -8,4 +8,4 @@ let
     sha256 = "sha256-zD59mMniEfR0SihJAWpa0SfLdI4cK6qeKnJUE3XjkHQ=";
   };
 in
-  art.illumina {} { fasta = input; name = "LC500247.1"; depth = 5; }
+  art.illumina { name = "LC500247.1"; } input
