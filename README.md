@@ -11,7 +11,7 @@ curl -L https://nixos.org/nix/install | sh
 ```
 Or follow the Nix official site: https://nixos.org/download.html
 
-###### Notes for Windows Users
+### Notes for Windows Users
 To use Nix on a Windows machine, Windows Subsystem for Linux 2 (WSL2) is required.
 Installing WSL2 requires the following prerequisites:
 - If you are running **Windows 10 version 2004 (20H1) or higher** (with **Build 19041 or higher**), or **Windows 11**, you can follow this installation [guide](https://learn.microsoft.com/en-us/windows/wsl/install).
