@@ -16,7 +16,7 @@ stage {
   buildInputs = [ art.app ];
   buildCommand = ''
     mkdir -p $out
-    art_illumina ${flags} --fcov 5 --in ${input} -o ${name}.${toString depth}x.
+    art_illumina ${flags} --fcov ${toString depth} --in ${input} -o ${name}.${toString depth}x.
     sed -i -E "s/^\@.*read([0-9]+).*$/@read\1/" ${name}.${toString depth}x.1.fq ${name}.${toString depth}x.2.fq
     cp ${name}.${toString depth}x.1.fq $out/
     cp ${name}.${toString depth}x.2.fq $out/
