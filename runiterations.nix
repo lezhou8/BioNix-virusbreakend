@@ -4,27 +4,18 @@
 }:
 
 # [ { fasta, name, startingposition, length, gap } ... ]
-inputs:
+input:
 
 with bionix;
 with lib;
 with builtins;
 
+# TODO: name the outputs properly
 let
-  listrange = range 1 iterations;
   mapinputs = iteration:
-    map (x: { fasta = x.fasta; name = x.name; position = x.startingposition + x.gap * iteration; length = x.length; }) inputs;
-  listoutputs = map (x: callBionix ./runatposition.nix { definition = "${productname}_${toString x}"; } (mapinputs x)) listrange;
+    map (x: { fasta = x.fasta; name = x.name; position = x.startingposition + x.gap * iteration; length = x.length; }) input;
+  listoutputs = genList (x: { name = "${productname}_${toString x}"; value = callBionix ./runatposition.nix { definition = "${productname}_${toString x}"; } (mapinputs x);}) iterations; # set { name = path }
+  setoutput = listToAttrs listoutputs;
+  recursesetoutput = mapAttrs (name: value: { fasta = value; } // (callBionix ./artloop.nix {} value)) setoutput;
 in
-  stage {
-    name = "iterate-integration-sites";
-    buildCommand = ''
-      mkdir $out
-      n=1
-      for file in ${concatStringsSep " " listoutputs}; do
-          mkdir $out/$n
-          ln -s $file $out/$n/${productname}_$n.fa
-          n=$(($n + 1))
-      done
-    '';
-  }
+  linkOutputs recursesetoutput 
