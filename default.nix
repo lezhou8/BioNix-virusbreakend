@@ -18,6 +18,6 @@ let
   viruses = [ hbv ];
   positions = [ 1000000 ];
   depths = [ 5 ];
-  align = depth: samtools.sort {} (bwa.mem { ref = ref.grch38.seq; } { input1 = (art.illumina { inherit depth; } virusReference).out; input2 = (art.illumina { inherit depth; } virusReference).pair; });
+  test = map (virus: map (position: let virusReference = insertVirus { fasta = chr1; inherit position; } virus; in map (depth: samtools.sort {} (bwa.mem { ref = ref.grch38.seq; } { input1 = (art.illumina { inherit depth; } virusReference).out; input2 = (art.illumina { inherit depth; } virusReference).pair; })) depths) positions) viruses;
 in
-  map (virus: map (position: let virusReference = insertVirus { fasta = chr1; inherit position; } virus; in map align depths) positions) viruses
+  (elemAt (elemAt (elemAt test 0) 0) 0)
