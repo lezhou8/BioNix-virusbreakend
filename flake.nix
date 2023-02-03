@@ -16,6 +16,7 @@
         };
       {
         defaultPackage = callBionix ./. { };
+        packages.small = callBionix ./. { small = true; };
       }
       );
 }

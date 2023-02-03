@@ -1,6 +1,7 @@
 { bionix }:
 
 with bionix;
+with builtins;
 with compression;
 
 let
@@ -13,5 +14,10 @@ let
     sha256 = "sha256-RFLpo174+DF3GPdh09J6HHO50NS439oJYWyuxDrWNG4=";
   };
   chr1 = uncompress {} chr1gz;
+  insertVirus = callBionix ./insertVirus/insertVirus.nix;
+  viruses = [ hbv ];
+  positions = [ 1000000 ];
+  depths = [ 5 ];
+  align = depth: samtools.sort {} (bwa.mem { ref = ref.grch38.seq; } { input1 = (art.illumina { inherit depth; } virusReference).out; input2 = (art.illumina { inherit depth; } virusReference).pair; });
 in
-  callBionix ./insertVirus/insertVirus.nix {} chr1 1000000 hbv
+  map (virus: map (position: let virusReference = insertVirus { fasta = chr1; inherit position; } virus; in map align depths) positions) viruses
