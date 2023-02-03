@@ -14,4 +14,4 @@ let
   };
   chr1 = uncompress {} chr1gz;
 in
-  callBionix ./insertVirus.nix {} chr1 1000000 hbv
+  callBionix ./insertVirus/insertVirus.nix {} chr1 1000000 hbv
