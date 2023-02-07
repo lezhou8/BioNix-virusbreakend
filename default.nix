@@ -1,15 +1,23 @@
 { bionix }:
 
 with bionix;
+with builtins;
+with compression;
 
 let
-  fq1 = fetchFastQ {
-    url = "https://github.com/PapenfussLab/bionix/raw/master/examples/sample1-1.fq";
-    sha256 = "0kh29i6fg14dn0fb1xj6pkpk6d83y7zg7aphkbvjrhm82braqkm8";
+  hbv = fetchFastA {
+    url = "https://raw.githubusercontent.com/PapenfussLab/gridss/master/scripts/virusbreakend_manuscript/scripts/LC500247.1.fa";
+    sha256 = "sha256-zD59mMniEfR0SihJAWpa0SfLdI4cK6qeKnJUE3XjkHQ=";
   };
-  fq2 = fetchFastQ {
-    url = "https://github.com/PapenfussLab/bionix/raw/master/examples/sample1-2.fq";
-    sha256 = "0czk85km6a91y0fn4b7f9q7ps19b5jf7jzwbly4sgznps7ir2kdk";
+  chr1gz = fetchFastAGZ {
+    url = "https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/assemblies/chm13.draft_v1.0.fasta.gz";
+    sha256 = "sha256-RFLpo174+DF3GPdh09J6HHO50NS439oJYWyuxDrWNG4=";
   };
+  chr1 = uncompress {} chr1gz;
+  insertVirus = callBionix ./insertVirus/insertVirus.nix;
+  viruses = [ hbv ];
+  positions = [ 1000000 ];
+  depths = [ 5 ];
+  test = map (virus: map (position: let virusReference = insertVirus { fasta = chr1; inherit position; } virus; in map (depth: samtools.sort {} (bwa.mem { ref = ref.grch38.seq; } { input1 = (art.illumina { inherit depth; } virusReference).out; input2 = (art.illumina { inherit depth; } virusReference).pair; })) depths) positions) viruses;
 in
-  samtools.sort {} (bwa.mem { ref = ref.grch38.seq; } { input1 = fq1; input2 = fq2; })
+  (elemAt (elemAt (elemAt test 0) 0) 0)
