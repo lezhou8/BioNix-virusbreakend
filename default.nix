@@ -14,7 +14,7 @@ let
     sha256 = "sha256-RFLpo174+DF3GPdh09J6HHO50NS439oJYWyuxDrWNG4=";
   };
   chr1 = uncompress {} chr1gz;
-  insertVirus = callBionix ./insertVirus/insertVirus.nix;
+  insertVirus = insert; 
   viruses = [ hbv ];
   positions = [ 1000000 ];
   depths = [ 5 ];
