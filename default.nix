@@ -13,8 +13,9 @@ let
     sha256 = "sha256-RFLpo174+DF3GPdh09J6HHO50NS439oJYWyuxDrWNG4=";
   };
   chr1 = uncompress {} chr1gz;
-  sequencelist = [ { fasta = hbv; name = "LC500247.1"; startingposition = 100; length = 80; gap = 100; }
-                   { fasta = chr1; name = "chr1"; startingposition = 100; length = 80; gap = 100; } ];
+  #sequencelist = [ { fasta = hbv; name = "LC500247.1"; startingposition = 100; length = 80; gap = 100; }
+  #                 { fasta = chr1; name = "chr1"; startingposition = 100; length = 80; gap = 100; } ];
 
 in
-  callBionix ./runiterations.nix { iterations = 1; productname = "chr1"; } sequencelist
+  #callBionix ./runiterations.nix { iterations = 1; productname = "chr1"; } sequencelist
+  callBionix ./integration.nix {virus = hbv; virus-label = "LC500247.1"; host = chr1; host-label = "chr1";} 1000000
