@@ -12,7 +12,7 @@ with lib;
 stage {
   name = "extract-sepcified-sequence"; 
   buildCommand = ''
-    echo "${readFile input}" | grep  "${label}" ${input} > $out
+    echo "${readFile input}" | grep "${label}" ${input} > $out
   '';
 }
   

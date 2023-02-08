@@ -17,5 +17,5 @@ let
   #                 { fasta = chr1; name = "chr1"; startingposition = 100; length = 80; gap = 100; } ];
 
 in
-  #callBionix ./runiterations.nix { iterations = 1; productname = "chr1"; } sequencelist
+  #callBionix ./integration.nix {virus = hbv; host = chr1;} 1000000
   callBionix ./integration.nix {virus = hbv; virus-label = "LC500247.1"; host = chr1; host-label = "chr1";} 1000000
