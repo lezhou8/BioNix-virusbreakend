@@ -11,7 +11,9 @@
     flake-utils.lib.eachDefaultSystem
       (system: with bionix.lib
         {
-          overlays = [ (self: super: { art = self.callBionix ./art_illumina/art.nix { }; }) ];
+          overlays = [ (self: super: { art = self.callBionix ./art_illumina/art.nix {};
+                                       insert = self.callBionix ./insertVirus/integration.nix;
+                                       }) ];
           nixpkgs = import nixpkgs { inherit system; };
         };
       {

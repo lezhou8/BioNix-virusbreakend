@@ -17,8 +17,14 @@ with lib;
 
 
 let
-  subsequence = callBionix ./samtools-faidx-edit.nix;
-  get-name = callBionix ./getFastaDef.nix {};
+  subsequence = callBionix ./samtools-queryRegion.nix;
+  get-name = fasta:
+    readFile (stage {
+      name = "get-fasta-def";
+      buildCommand = ''
+          head -n 1 ${fasta} | awk '{print $1}' | sed 's/>//' | tr -d '\n' > $out
+        '';
+    });
   virus-name = if virus-label != null then virus-label else (get-name virus);
   host-name = if host-label != null then host-label else (get-name host);
 
