@@ -15,5 +15,5 @@ let
   chr1 = uncompress {} chr1gz;
 
 in
-  insert {virus = hbv; host = chr1;} 1000000
+  insert {virus = hbv; host = chr1; virus-position = 1;} 1000000
   #insert {virus = hbv; virus-label = "LC500247.1"; host = chr1; host-label = "chr1";} 1000000
