@@ -3,6 +3,7 @@
 , breakOffset ? 10
 , virusLength ? 2000
 , position ? 1000000
+, virusPosition ? 4
 , fasta ? bionix.ref.grch38.seq
 }:
 
@@ -18,7 +19,7 @@ let
   fastaName = callBionix ./getFastaDef.nix {} fasta;
   virusName = callBionix ./getFastaDef.nix {} input;
   left = justSequence (queryRegion { regions = [ "${fastaName}:${toString (position - flank)}-${toString position}" ]; } fasta);
-  middle = justSequence (queryRegion { regions = [ "${virusName}:${toString (position * 4 / 1000000 )}-${toString (position * 4 / 1000000 + virusLength)}" ]; } input);
+  middle = justSequence (queryRegion { regions = [ "${virusName}:${toString (virusPosition)}-${toString (virusPosition + virusLength)}" ]; } input);
   right = justSequence (queryRegion { regions = [ "${fastaName}:${toString position}-${toString (position + breakOffset + flank)}" ]; } fasta);
   together = callBionix ./catfiles.nix {} [ left middle right ];
 in
