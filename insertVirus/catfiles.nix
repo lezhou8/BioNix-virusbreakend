@@ -9,5 +9,5 @@ stage {
   name = "concatonate-files";
   buildCommand = ''
       cat ${concatStringsSep " " files} > $out
-    '';
+  '';
 }

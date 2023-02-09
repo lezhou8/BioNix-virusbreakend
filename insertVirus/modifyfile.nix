@@ -8,6 +8,6 @@ with builtins;
 stage {
   name = "modify-file";
   buildCommand = ''
-    echo "${readFile file}" | grep -v '>' | tr -d '\n' > $out
+    grep -v '>' ${file} | tr -d '\n' > $out
   '';
 }
