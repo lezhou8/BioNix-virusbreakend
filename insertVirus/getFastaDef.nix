@@ -10,5 +10,4 @@ readFile (stage {
   buildCommand = ''
       head -n 1 ${input} | awk '{print $1}' | sed 's/>//' | tr -d '\n' > $out
     '';
-  stripStorePaths = false;
 })
