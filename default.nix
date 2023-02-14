@@ -30,9 +30,9 @@ let
         virus;
     in
       map (depth:
-        samtools.sort {} (bwa.mem {ref = ref.grch38.seq;} {
-          input1 = (art.illumina {inherit depth;} virusReference).out;
-          input2 = (art.illumina {inherit depth;} virusReference).pair;
+        samtools.sort {} (bwa.mem { ref = ref.grch38.seq; } {
+          input1 = (art.illumina { inherit depth; } virusReference).out;
+          input2 = (art.illumina { inherit depth; } virusReference).pair;
         }))
       depths)
     positions)
