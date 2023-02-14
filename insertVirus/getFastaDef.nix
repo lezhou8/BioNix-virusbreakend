@@ -1,9 +1,9 @@
 { bionix }:
 
+input:
+
 with bionix;
 with builtins;
-
-input:
 
 readFile (stage {
   name = "get-fasta-def";

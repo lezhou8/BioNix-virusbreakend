@@ -1,12 +1,13 @@
-{ bionix 
-, definition ? ""
+{
+  bionix,
+  definition ? "",
 }:
 
 path:
 
 with bionix;
 
-stage{
+stage {
   name = "attach-definition-line";
   buildCommand = ''
     echo ">${definition}" > $out

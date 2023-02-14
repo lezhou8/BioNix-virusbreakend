@@ -1,8 +1,4 @@
-{
-  fetchurl,
-  stdenv,
-  gsl,
-}:
+{ fetchurl, stdenv, gsl }:
 stdenv.mkDerivation {
   name = "Art";
   src = fetchurl {

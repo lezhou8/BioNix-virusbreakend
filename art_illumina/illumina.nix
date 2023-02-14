@@ -4,17 +4,17 @@
 , name ? "test"
 }:
 
+input:
+
 with bionix;
 with pkgs;
 with builtins;
 with types;
 
-input:
-
 stage {
   name = "illumina";
   buildInputs = [ art.app ];
-  outputs = ["out" "pair"];
+  outputs = [ "out" "pair" ];
   buildCommand = ''
     art_illumina ${flags} --fcov ${toString depth} --in ${input} -o ${name}.${toString depth}x.
     sed -i -E "s/^\@.*read([0-9]+).*$/@read\1/" ${name}.${toString depth}x.1.fq ${name}.${toString depth}x.2.fq
