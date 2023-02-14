@@ -14,9 +14,9 @@ let
     sha256 = "sha256-RFLpo174+DF3GPdh09J6HHO50NS439oJYWyuxDrWNG4=";
   };
   chr1 = uncompress {} chr1gz;
-  viruses = [hbv];
-  positions = [1000000];
-  depths = [5];
+  viruses = [ hbv ];
+  positions = [ 1000000 ];
+  depths = [ 5 ];
   multiplier = 4 / 1000000;
   relativeVirusPosition = position: position * multiplier;
   alignments = map (virus:
@@ -38,4 +38,4 @@ let
     positions)
   viruses;
 in
-  (elemAt (elemAt (elemAt alignments 0) 0) 0)
+  elemAt (elemAt (elemAt alignments 0) 0) 0
