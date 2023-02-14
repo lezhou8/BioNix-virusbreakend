@@ -37,4 +37,5 @@ let
       depths)
     positions)
   viruses;
-in (elemAt (elemAt (elemAt alignments 0) 0) 0)
+in
+  (elemAt (elemAt (elemAt alignments 0) 0) 0)
